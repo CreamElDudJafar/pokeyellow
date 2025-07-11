@@ -154,15 +154,15 @@ AnimationOffText:
 OptionsMenu_BattleStyle:
 	ldh a, [hJoy5]
 	and PAD_LEFT | PAD_RIGHT
-	jr nz, .asm_41d6b
+	jr nz, .buttonPressed
 	ld a, [wOptions]
-	and $40 ; mask other bits
-	jr .asm_41d73
-.asm_41d6b
+	and 1 << BIT_BATTLE_SHIFT
+	jr .done
+.buttonPressed
 	ld a, [wOptions]
-	xor $40
+	xor 1 << BIT_BATTLE_SHIFT
 	ld [wOptions], a
-.asm_41d73
+.done
 	ld bc, $0
 	sla a
 	sla a
